@@ -14,7 +14,7 @@ const Categorias = (props) => {
 	const [ generos, setGeneros ] = useState([{_id: 'Todos'}]);
 	const [ temporadas, setTemporadas ] = useState([]);
 /* 	const [ loading, setLoading ] = useState(false); */
-	const { reloadFilter } = useContext(MenuContext);
+	const { reloadFilter, setLoading } = useContext(MenuContext);
 
 	const [ categoriaSeleccionada, setCategoriaSeleccionada, ] = useState(null);
 	const [ subcategoriaSeleccionada, setSubcategoriaSeleccionada, ] = useState(null);
@@ -39,7 +39,7 @@ const Categorias = (props) => {
 	}
 
 	async function obtenerCategorias() {
-		// setLoading(true);
+		setLoading(true);
 		await clienteAxios
 			.get('/productos/filtrosNavbar', {
 				headers: {
@@ -47,12 +47,12 @@ const Categorias = (props) => {
 				}
 			})
 			.then((res) => {
-				// setLoading(false);
+				setLoading(false);
 				setCategorias(res.data);
 				window.scrollTo(0, 0);
 			})
 			.catch((res) => {
-				// setLoading(false);
+				setLoading(false);
 			});
 	}
 
